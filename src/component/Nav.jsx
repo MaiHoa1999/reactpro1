@@ -1,30 +1,36 @@
+import { Link } from "react-router-dom";
+import ReactDOM from 'react-dom'
+
 export function Nav(){
-    return(
-        <div>
+    return ReactDOM.createPortal(
+
+        <>
         <nav className="nav">
           <ul>
             <li className="li_login">
-              <a href="#">Đăng nhập</a>
-              <a href="#">Đăng ký</a>
+              <Link to="/dang-nhap">Đăng nhập</Link>
+              <Link to="/register">Đăng ký</Link>
             </li>
             <li className="active">
-              <a href="#">Trang chủ</a>
+              <Link to="/">Trang chủ</Link>
             </li>
             <li>
-              <a href="#">CFD Team</a>
+              <Link to="/team">CFD Team</Link>
             </li>
             <li>
-              <a href="#">Khóa Học</a>
+              <Link to="/course">Khóa Học</Link>
             </li>
             <li>
-              <a href="#">Dự Án</a>
+              <Link to="/project">Dự Án</Link>
             </li>
             <li>
-              <a href="#">Liên hệ</a>
+              <Link to="/hoptac">Liên hệ</Link>
             </li>
           </ul>
         </nav>
         <div className="overlay_nav" />
-      </div>
+     
+      </>,
+ document.body
     )
 }
