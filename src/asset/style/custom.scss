@@ -3,10 +3,34 @@
     
 }
 .text-error{
-    font-size: 12px;
+    font-size: 18px;
     font-style: italic;
     color: red;
     padding-left: 230px;
     margin-top: -20px;
     margin-bottom: 10px;
 }
+.loading{
+    background-color: #00afab;
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    transition-duration: 0.6s;
+
+}
+.nav li a.active{
+    background-color: #00afab;
+}
+.txt-error{
+    font-size: 18px;
+    font-style: italic;
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+

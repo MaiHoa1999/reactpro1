@@ -1,12 +1,14 @@
 import { useState } from "react"
-import { Switch ,Route, useRouteMatch} from "react-router"
+import { Switch ,Route, useRouteMatch, Redirect} from "react-router"
 import { NavLink } from "react-router-dom"
 import Tab1 from "./component/tab1"
 import Tab2 from "./component/tab2"
 import Tab3 from "./component/tab3"
 import Tab4 from "./component/tab4"
 import Tab5 from "./component/tab5"
-
+import Topinfo from "./component/Topinfo"
+import {useContext} from 'react'
+import {Context} from '../../App'
 export default function Profile(){
     // let [tabActive,setTabActive] = useState(0)
     // function setTab(e,index){
@@ -16,18 +18,11 @@ export default function Profile(){
     // }
     let{ path} = useRouteMatch()
 
-
+    let {login }= useContext(Context)
+   if(!login) return <Redirect path="/"/>
     return( <main className="profile" id="main">
     <section>
-      <div className="top-info">
-        <div className="avatar">
-          {/* <span class="text">H</span> */}
-          <img src="img/avatar-lg.png" alt="" />
-          <div className="camera" />
-        </div>
-        <div className="name">trần nghĩa</div>
-        <p className="des">Thành viên của team CFD1-OFFLINE</p>
-      </div>
+      <Topinfo/>
       <div className="container">
         <div className="tab">
           <div className="tab-title">

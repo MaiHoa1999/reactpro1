@@ -1,77 +1,94 @@
 import React, {useState} from 'react'
+import useFormValidate from '../../hook/useFormValidate'
 export default function Hoptac(){
-    const [form, setForm] = useState({
+    let {error, inputChange, check,form}= useFormValidate({
         name:'',
         phone: '',
         email:'',
         url: '',
         title:'',
         content:''
+ 
+    },{
+        rule:{
+            name:{
+            required:true
+        } ,
+        phone:{
+            required:true,
+            pattern: 'phone'
+        },
+        url:{
+            required:true,
+            pattern: 'url'
+        },
+        title:{
+            required:true,
+            pattern: 'title'
+        },
+        email:{
+            required:true,
+            pattern: 'email'
+        },
+        content:{
+            required:true,
+            pattern: 'content'
+        }},
+        message:{
+          name:{
+            pattern: ' name ko dung dinh dang'
+          },
+          email:{
+            pattern: ' email ko dung dinh dang'
+          },
+          url:{
+            pattern: ' url ko dung dinh dang'
+          },
+          phone:{
+            pattern: ' phone ko dung dinh dang'
+          }
 
+          
+        }
     })
-    //show error
-    const [error, setError] = useState({
-        name:'',
-        phone: '',
-        email:'',
-        url: '',
-        title:'',
-        content:''
-    })
+    // const [form, setForm] = useState({
+    //     name:'',
+    //     phone: '',
+    //     email:'',
+    //     url: '',
+    //     title:'',
+    //     content:''
+
+    // })
+    // //show error
+    // const [error, setError] = useState({
+    //     name:'',
+    //     phone: '',
+    //     email:'',
+    //     url: '',
+    //     title:'',
+    //     content:''
+    // })
 //   trim la ko cho khoang cach dau, replace khoang cach cac tu xa se ko co khoang trang
     function onSubmit(){
-        const errorObj = {}
-       
-        if(!form.name.trim()){
-           errorObj.name ='name bat buoc'
-           
-        }
-        if(!form.phone){
-            errorObj.phone ='phone bat buoc'
-           
-        }
-        else if(!/(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(form.phone)){
-            errorObj.phone ='phone phai dung dinh dang (10 so)'
-           
-        }
-        if(!form.email.trim()){
-            errorObj.email ='email bat buoc ko khoang trang'
-           
-        }
-        else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email)){
-            errorObj.email ='email phai dung dinh dang '
-           
-            }
-            
-        if(form.url &&!/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(form.url)){
-            errorObj.url ='url phai dung dinh dang '
-           
-        }
-        if(!form.title){
-            errorObj.title ='title bat buoc'
-           
-        }
-        if(!form.content){
-            errorObj.content ='content bat buoc'
-           
-        }
-       
+        let errorObj = check()
+        // setError(errorObj);
+        // console.log(`error`, error)
         if(Object.keys(errorObj).length === 0){
             console.log(form)
         }
-        setError(errorObj);
         
     }
    
-    function inputOnChange(e){
-        let name = e.target.name
-        let value = e.target.value
+    // function inputOnChange(e){
+    //     let name = e.target.name
+    //     let value = e.target.value
 
-        setForm({
-            ...form,
-            [name]: value
-        })
-    }
+    //     setForm({
+    //         ...form,
+    //         [name]: value
+    //     })
+    // }
     return(
         <main className="register-course" id="main">
         <section className="section-1 wrap container">
@@ -84,13 +101,13 @@ export default function Hoptac(){
           <div className="form">
             <label>
               <p>Họ và tên<span>*</span></p>
-              <input type="text" value={form.name} name="name" onChange={inputOnChange} placeholder="Họ và tên bạn" />
+              <input type="text" value={form.name} name="name" onChange={inputChange} placeholder="Họ và tên bạn" />
                
             </label>
             {error.name ? <p className="text-error">{error.name}</p>:null}
             <label>
               <p>Số điện thoại</p>
-              <input type="text" value={form.phone} name="phone" onChange={inputOnChange} placeholder="Số điện thoại" />
+              <input type="text" value={form.phone} name="phone" onChange={inputChange} placeholder="Số điện thoại" />
            
             </label>
             {
@@ -100,7 +117,7 @@ export default function Hoptac(){
               <p>Email<span>*</span></p>
               
             
-            <input type="text" value={form.email} name="email" onChange={inputOnChange} placeholder="Email của bạn" />
+            <input type="text" value={form.email} name="email" onChange={inputChange} placeholder="Email của bạn" />
              
             </label>
             {
@@ -108,7 +125,7 @@ export default function Hoptac(){
             }
             <label>
               <p>Website</p>
-              <input type="text" value={form.url} name="url" onChange={inputOnChange} placeholder="Đường dẫn website http://" />
+              <input type="text" value={form.url} name="url" onChange={inputChange} placeholder="Đường dẫn website http://" />
              
             </label>
             {
@@ -116,7 +133,7 @@ export default function Hoptac(){
             }
             <label>
               <p>Tiêu đề<span>*</span></p>
-              <input type="text" name="title" value={form.title} onChange={inputOnChange} placeholder="Tiêu đề liên hệ" />
+              <input type="text" name="title" value={form.title} onChange={inputChange} placeholder="Tiêu đề liên hệ" />
               
             </label>
             {
@@ -124,7 +141,7 @@ export default function Hoptac(){
             }
             <label>
               <p>Nội dung<span>*</span></p>
-              <textarea  name="content" value={form.content} onChange={inputOnChange}  id cols={30} rows={10} defaultValue={""} />
+              <textarea  name="content" value={form.content} onChange={inputChange}  id cols={30} rows={10} defaultValue={""} />
               
             </label>
             {
