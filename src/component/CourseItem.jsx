@@ -1,17 +1,20 @@
-export function CourseItem({name, desc, image,teacher_avt, teacher_name, status}){
+import { Link } from "react-router-dom"
+
+export function CourseItem({title, short_description, thumbnail,teacher, course_status}){
     // name, desc, image,teacher_avt, teacher_name, status
     return(
         <div className="col-md-4 course">
         <div className="wrap">
-          <a className="cover" href="#">
-            <img src={image} alt="" />
+        
+          <Link className="cover" to={`/course`}>
+            <img src={thumbnail.link} alt="" />
 
             {/* status */}
-            {status === "da-ket-thuc" ? (
+            {course_status === "da-ket-thuc" ? (
             <span className="badge b1">Đã kết thúc</span>
-          ) : status === "dang-dien-ra" ? (
+          ) : course_status === "dang-dien-ra" ? (
             <span className="badge b2">Đang diễn ra</span>
-          ) : status === "sap-dien-ra" ? (
+          ) : course_status === "sap-dien-ra" ? (
             <span className="badge b3">Sắp diễn ra</span>
           ) : (
             ""
@@ -30,21 +33,21 @@ export function CourseItem({name, desc, image,teacher_avt, teacher_name, status}
                 <img src="img/icon-viewmore.svg" alt="" />
               </div>
             </div>
-          </a>
+          </Link>
           <div className="info">
             <a className="name" href="#">
-              {name}
+              {title}
             </a>
             <p className="des">
-              {desc}
+              {short_description}
             </p>
           </div>
           <div className="bottom">
             <div className="teacher">
               <div className="avatar">
-                <img src={teacher_avt} alt="" />
+                <img src={teacher.avatar.link} alt="" />
               </div>
-              <div className="name">{teacher_name}</div>
+              <div className="name">{teacher.title}</div>
             </div>
             <div className="register-btn">Đăng Ký</div>
           </div>

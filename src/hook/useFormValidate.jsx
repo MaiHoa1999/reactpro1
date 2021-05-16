@@ -24,9 +24,9 @@ export default function useFormValidate(initiaForm, validate) {
 
     for (let i in rule) {
       let r = rule[i];
-      let m = message[i] || {}
+      let m = message || {}
       if (r.required && !form[i]) {
-         errorObj[i] = m?.required || ' truong nay ko dc bo trong';
+         errorObj[i] = m[i]?.required || ' truong nay ko dc bo trong';
         continue;
       }
     

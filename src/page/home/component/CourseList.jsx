@@ -1,6 +1,6 @@
 
 import {CourseItem }from '../../../component'
-export default function CourseList(){
+export default function CourseList({online,offline}){
     return(
   
         <div>
@@ -15,7 +15,23 @@ export default function CourseList(){
               <h2 className="main-title">Khóa học Offline</h2>
             </div>
             <div className="list row">
-            <CourseItem 
+            {
+              offline.map((value,i) => <CourseItem 
+              key={value.slug}
+              {...value}
+              />
+              )
+
+                // name="Front-end căn bản"
+                // desc ="One of the best corporate fashion brands in Sydney"
+                // image = "img/img1.png"
+                // teacher_avt = "img/avt.png"
+                // teacher_name = "Trần Nghĩa 1"
+                // status = "da-ket-thuc"
+                
+            // />
+            }
+            {/* <CourseItem 
                 name="Front-end căn bản"
                 desc ="One of the best corporate fashion brands in Sydney"
                 image = "img/img1.png"
@@ -68,7 +84,7 @@ export default function CourseList(){
                 teacher_name = "Trần Nghĩa 6"
                 status = "sap-dien-ra"
                 
-            />
+            /> */}
           
             </div>
           </div>
@@ -79,8 +95,14 @@ export default function CourseList(){
               <h2 className="main-title">Khóa học Online</h2>
             </div>
             <div className="list row">
-              
-            <CourseItem 
+            {
+              online.map((value,i) => <CourseItem 
+              key={value.slug}
+              {...value}
+              />
+              )
+              }
+            {/* <CourseItem 
                 name="Front-end căn bản"
                 desc ="One of the best corporate fashion brands in Sydney"
                 image = "img/img1.png"
@@ -106,7 +128,7 @@ export default function CourseList(){
                 teacher_name = "Trần Nghĩa 3"
                 status = "dang-dien-ra"
                 
-            />
+            /> */}
             </div>
             <div className="text-deco">C</div>
           </div>

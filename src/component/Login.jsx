@@ -2,10 +2,13 @@
 import useFormValidate from '../hook/useFormValidate'
 import ReactDOM from 'react-dom';
 import $ from "jquery"
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {Context} from '../App.js'
 // import useDeLayLink from '../hook/useDelayLink'
 export function Login(){
+  let{loginError, setLoginError} = useState(null)
+  let{handlelogin} = useContext(Context)
+
   function hideLogin(){
     $('.popup-login').hide()
   }
@@ -29,23 +32,29 @@ let {error, inputChange, check,form}= useFormValidate({
     }
 }
 })
-function onSubmit(){
+async function onSubmit(){
     let errorObj = check()
     // setError(errorObj);
     // console.log(`error`, error)
     if(Object.keys(errorObj).length === 0){
-     let res= handlelogin(form.email, form.pass)
-     if(res){
-       alert(res)
-     }else{
-      hideLogin()
-     }
+      let res= await handlelogin(form.email, form.pass)
+     
+      if(res.success){
+        hideLogin()
+      }else if(error){
+        setLoginError(res.error)
+      }
+     
+    //  if(res){
+    //    alert(res)
+    //  }else{
+    //   hideLogin()
+    //  }
         // console.log(form)
         // alert("thanh cong");
     }
     
 }
-let{handlelogin} = useContext(Context)
 
 
 
@@ -59,6 +68,7 @@ let{handlelogin} = useContext(Context)
             {/* login-form */}
             <div className="ct_login" style={{display: 'block'}}>
               <h2 className="title">Đăng nhập</h2>
+              {loginError && <p className="txt-error">{loginError}</p>}
               <input type="text" value={form.email} name="email" onChange={inputChange} placeholder="Email / Số điện thoại" />
               {
                 error.email && <p className="txt-error">{error.email}</p>

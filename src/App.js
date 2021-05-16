@@ -12,6 +12,8 @@ import Hoptac from "./page/hoptac";
 import "./asset/style/custom.scss";
 import Profile from "./page/profile";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ListCourse from "./page/course_detail/component/ListCouse";
+import Auth from "./service/auth";
 
 
 
@@ -27,20 +29,65 @@ function App() {
     ))
   }, [state.login])
 
-  function handlelogin(email,pass){
-    if(email === 'admin@gmail.com' && pass === '123456'){
-      setState({
-        ...state,
-        login:{
-          name: 'mai hoa',
-          avt: '/img/avt/png'
+ async function handlelogin(email,pass){
+   try{
+    let res= await Auth.login(email.pass)
+    
+    if(res.data){
+          setState({
+            ...state,
+            login:res.data
+          })
+          return {
+            success:true
+          }
+        }else if(res.error){
+          return{
+            error:res.error
+          }
         }
-      })
+        // setState({
+        //   ...state,
+        //   loginError: res.error
+        // })
+   }catch(err){
+
+   }
+   
   
-    }
-    else{
-      return 'sai thong tin';
-    }
+  // .then((res)=>{
+  //   return res.json()
+  // })
+  // .then((res)=>{
+  //   if(res.data){
+  //     setState({
+  //       ...state,
+  //       login:res.data
+  //     })
+  //   }else if(res.error)
+  //   setState({
+  //     ...state,
+  //     loginError: res.error
+  //   })
+  // })
+  //   .catch((err) =>{
+  //     console.log(err)    })
+  
+    // if(email === 'admin@gmail.com' && pass === '123456'){
+    //   setState({
+    //     ...state,
+    //     login:{
+    //       name: 'mai hoa',
+    //       avt: '/img/avt/png'
+    //     }
+    //   })
+  
+    // }
+    // else{
+    //   return 'sai thong tin';
+    // }
+
+
   }
   function handleLogout(){
     setState({
@@ -49,6 +96,7 @@ function App() {
     })
     
   }
+  
   return (
     <Context.Provider value={{...state,handlelogin, handleLogout}}>
     <Router>
@@ -64,7 +112,7 @@ function App() {
           <Route path="/profile" >
             <Profile />
           </Route>
-          <Route path="/courseDatail" component={CourseDatail}></Route>
+          <Route path="/course/:slug" component={CourseDatail}></Route>
           <Route path="/team" component={TeamList}></Route>
           <Route path="/register" component={Register}></Route>
 
