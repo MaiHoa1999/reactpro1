@@ -7,7 +7,7 @@ export function CourseItem({title, short_description, thumbnail,teacher, course_
         <div className="wrap">
         
           <Link className="cover" to={`/course`}>
-            <img src={thumbnail.link} alt="" />
+            <img src={thumbnail?.link} alt="" />
 
             {/* status */}
             {course_status === "da-ket-thuc" ? (
@@ -45,9 +45,9 @@ export function CourseItem({title, short_description, thumbnail,teacher, course_
           <div className="bottom">
             <div className="teacher">
               <div className="avatar">
-                <img src={teacher.avatar.link} alt="" />
+                <img src={teacher?.avatar.link} alt="" />
               </div>
-              <div className="name">{teacher.title}</div>
+              <div className="name">{teacher?.title}</div>
             </div>
             <div className="register-btn">Đăng Ký</div>
           </div>

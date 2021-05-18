@@ -26,7 +26,7 @@ export default function useFormValidate(initiaForm, validate) {
       let r = rule[i];
       let m = message || {}
       if (r.required && !form[i]) {
-         errorObj[i] = m[i]?.required || ' truong nay ko dc bo trong';
+         errorObj[i] = m[i]?.required || ' Trường này không được bỏ trống';
         continue;
       }
     
@@ -36,15 +36,15 @@ export default function useFormValidate(initiaForm, validate) {
         if (pattern === "email") pattern = patternEmail;
         if (pattern === "url") pattern = patternUrl;
         if (!pattern.test(form[i])) {
-          errorObj[i] = message[i]?.pattern ||  " truong nay ko dung dinh dang";
+          errorObj[i] = message[i]?.pattern ||  " Trường này không đúng định dạng";
         }
       }
       if(r.min){
         if(form[i].length < r.min){
-          errorObj[i] = m?.min || `truong nay ko dc it hon ${r.min} ki tu`;
+          errorObj[i] = m?.min || `Trường này không được ít hơn ${r.min} kí tự`;
         }
         if(form[i].length > r.max){
-          errorObj[i] = m?.max || `truong nay ko dc it hon ${r.max} ki tu`;
+          errorObj[i] = m?.max || `Trường này không được ít hơn  ${r.max} kí tự`;
         }
       }
     }

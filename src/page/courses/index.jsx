@@ -17,61 +17,13 @@ export default function Courses(){
             <h2 className="main-title">ONLINE</h2>
           </div>
           <div className="list row">
-          <CourseItem 
-                name="Front-end căn bản"
-                desc ="One of the best corporate fashion brands in Sydney"
-                image = "img/img1.png"
-                teacher_avt = "img/avt.png"
-                teacher_name = "Trần Nghĩa 1"
-                status = "da-ket-thuc"
-                
-            />
-            <CourseItem 
-                name="UX/UI Design"
-                desc ="One of the best corporate fashion brands in Sydney"
-                image = "img/img2.png"
-                teacher_avt = "img/avt.png"
-                teacher_name = "Trần Nghĩa 2"
-                status = "sap-dien-ra"
-                
-            />
-            <CourseItem 
-                name="Laravel framework"
-                desc ="One of the best corporate fashion brands in Sydney"
-                image = "img/img3.png"
-                teacher_avt = "img/avt.png"
-                teacher_name = "Trần Nghĩa 3"
-                status = "dang-dien-ra"
-                
-            />
-            <CourseItem 
-                name="Front-end căn bản"
-                desc ="One of the best corporate fashion brands in Sydney"
-                image = "img/img4.png"
-                teacher_avt = "img/avt.png"
-                teacher_name = "Trần Nghĩa 4"
-                status = "sap-dien-ra"
-                
-            />
-            <CourseItem 
-                name="Front-end nâng cao"
-                desc ="One of the best corporate fashion brands in Sydney"
-                image = "img/img5.png"
-                teacher_avt = "img/avt.png"
-                teacher_name = "Trần Nghĩa 5"
-                status = "da-ket-thuc"
-                
-            />
-            <CourseItem 
-                name="Front-end căn bản"
-                desc ="One of the best corporate fashion brands in Sydney"
-                image = "img/img1.png"
-                teacher_avt = "img/avt.png"
-                teacher_name = "Trần Nghĩa 6"
-                status = "sap-dien-ra"
-                
-            />
-          
+          {/* {
+              offline.map((value,i) => <CourseItem 
+              key={value.slug}
+              {...value}
+              />
+              )} */}
+         
           </div>
         </div>
       </section>

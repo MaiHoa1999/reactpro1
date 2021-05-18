@@ -8,22 +8,24 @@ import Action from './component/Action'
 import CourseApi from '../../service/course'
 import { useState, useEffect } from 'react'
 export default function Home(){
-  let [list, setList] =useState({
+  let [state, setState] =useState({
     offline:[],
     online:[]
   })
-  useEffect(() => {
-    CourseApi.list()
-    .then(res =>{
-        setList(res)
-        // console.log(res)
-    })
-
+  useEffect(async() => {
+      let res = await CourseApi.home();
+      setState({
+        online: res.online,
+        offline:res.offline
+      })
+      console.log(`res`, res)
+      
   }, [])
+  // console.log("off",list.offline)
     return(
         <main className="homepage" id="main">
         <Banner />
-        <CourseList {...list}/>
+        <CourseList offline={state.offline} online={state.online}/>
         <Special />
         <Testimonial/>
         <Gallery/>

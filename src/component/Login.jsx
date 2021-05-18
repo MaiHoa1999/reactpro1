@@ -3,28 +3,33 @@ import useFormValidate from '../hook/useFormValidate'
 import ReactDOM from 'react-dom';
 import $ from "jquery"
 import React, {useContext, useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {Context} from '../App.js'
+import Auth from '../service/auth';
 // import useDeLayLink from '../hook/useDelayLink'
 export function Login(){
   let{loginError, setLoginError} = useState(null)
+  let  dispatch = useDispatch()
+  
   let{handlelogin} = useContext(Context)
 
   function hideLogin(){
     $('.popup-login').hide()
   }
+
 let {error, inputChange, check,form}= useFormValidate({
    
-    email:'',
-    pass: '',
+    username:'',
+    password: '',
    
 
 },{
     rule:{
-        email:{
+        username:{
         required:true,
         pattern: "email"
     } ,
-    pass:{
+    password:{
         required:true,
         
         min: 6,
@@ -37,13 +42,23 @@ async function onSubmit(){
     // setError(errorObj);
     // console.log(`error`, error)
     if(Object.keys(errorObj).length === 0){
-      let res= await handlelogin(form.email, form.pass)
-     
-      if(res.success){
-        hideLogin()
-      }else if(error){
-        setLoginError(res.error)
+      let res = await Auth.login(form)
+      if(res.data){
+        dispatch({
+          type: 'LOGIN',
+          payload: res.data
+          
+        })
+      }else if( res.error){
+        setLoginError( res.error)
       }
+      //  handlelogin(form)
+     
+      // if(res.success){
+      //   hideLogin()
+      // }else if(error){
+      //   setLoginError(res.error)
+      // }
      
     //  if(res){
     //    alert(res)
@@ -69,13 +84,13 @@ async function onSubmit(){
             <div className="ct_login" style={{display: 'block'}}>
               <h2 className="title">Đăng nhập</h2>
               {loginError && <p className="txt-error">{loginError}</p>}
-              <input type="text" value={form.email} name="email" onChange={inputChange} placeholder="Email / Số điện thoại" />
+              <input type="text" value={form.username} name="username" onChange={inputChange} placeholder="username / Số điện thoại" />
               {
-                error.email && <p className="txt-error">{error.email}</p>
+                error.username && <p className="txt-error">{error.username}</p>
             }
-              <input type="password" value={form.pass} name="pass" onChange={inputChange} placeholder="Mật khẩu" />
+              <input type="password" value={form.password} name="password" onChange={inputChange} placeholder="Mật khẩu" />
               {
-                error.pass && <p className="txt-error">{error.pass}</p>
+                error.password && <p className="txt-error">{error.password}</p>
             }
               <div className="remember">
                 <label className="btn-remember">
@@ -100,10 +115,10 @@ async function onSubmit(){
                 <img src="img/close-icon.png" alt="" />
               </div>
             </div>
-            {/* email form */}
-            <div className="ct_email">
+            {/* username form */}
+            <div className="ct_username">
               <h2 className="title">Đặt lại mật khẩu</h2>
-              <input type="text" placeholder="Email" />
+              <input type="text" placeholder="username" />
               <div className="btn rect main btn-next">Tiếp theo</div>
               <div className="back" />
               <div className="close" onClick={hideLogin}>

@@ -1,4 +1,5 @@
 import { Header, Nav, Footer, Login } from "./component";
+import { Provider} from 'react-redux'
 import React, {useState,useEffect} from 'react'
 import Home from "./page/home";
 import Project from "./page/project";
@@ -14,14 +15,14 @@ import Profile from "./page/profile";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ListCourse from "./page/course_detail/component/ListCouse";
 import Auth from "./service/auth";
-
-
+import store from './redux'
 
 export let Context = React.createContext({})
 
 function App() {
   let [state, setState] = useState({
-    login: JSON.parse(localStorage.getItem('login'))
+    login: JSON.parse(localStorage.getItem("login")) || false,
+    data:  JSON.parse(localStorage.getItem("data")) || {},
   })
   useEffect(() => {
     localStorage.setItem('login',JSON.stringify(
@@ -29,15 +30,19 @@ function App() {
     ))
   }, [state.login])
 
- async function handlelogin(email,pass){
+ async function handlelogin(form){
    try{
-    let res= await Auth.login(email.pass)
+    let res = await Auth.login(form)
     
     if(res.data){
           setState({
             ...state,
-            login:res.data
+            login: true,
+            data: res.data
           })
+      localStorage.setItem("login", JSON.stringify(state.login))
+      localStorage.setItem("data", JSON.stringify(res.data))
+
           return {
             success:true
           }
@@ -98,6 +103,7 @@ function App() {
   }
   
   return (
+    <Provider store ={store}>
     <Context.Provider value={{...state,handlelogin, handleLogout}}>
     <Router>
       <div className="App">
@@ -133,6 +139,7 @@ function App() {
       </div>
     </Router>
     </Context.Provider>
+    </Provider>
   );
 }
 

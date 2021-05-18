@@ -16,9 +16,10 @@ export default function Profile(){
     //     setTabActive(index)
 
     // }
+    
     let{ path} = useRouteMatch()
 
-    let {login }= useContext(Context)
+    let {login,data }= useContext(Context)
    if(!login) return <Redirect path="/"/>
     return( <main className="profile" id="main">
     <section>

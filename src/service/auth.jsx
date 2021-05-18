@@ -1,13 +1,15 @@
 import{endpoint} from './config'
  const Auth={
-    login(data){
-        return  fetch(`${endpoint}/elearning/v4/login`,{
+   
+    login(form){
+     
+        return  fetch(`http://cfd-reactjs.herokuapp.com/elearning/v4/login`,{
             method: "POST",
-            body:JSON.stringify(data),
             headers:{
               'Content-Type':'application/json'
-            }
-          }).then(res => res.json())
+            },
+            body:JSON.stringify(form),
+          }).then(res=>res.json())
 
     },
     register(){},
