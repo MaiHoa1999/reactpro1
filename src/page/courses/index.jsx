@@ -9,8 +9,8 @@ export default function Courses(){
   })
 
   useEffect(async() => {
-    let res = await CourseApi.home();
-    // console.log(`res`, res)
+    let res = await CourseApi.course();
+    console.log(`res`, res)
     setState({
       online: res.online,
       offline:res.offline
@@ -31,11 +31,24 @@ export default function Courses(){
           </p>
           <div className="textbox">
             <h3 className="sub-title">KHÓA HỌC</h3>
-            <h2 className="main-title">ONLINE</h2>
+            <h2 className="main-title">OFFLINE</h2>
           </div>
           <div className="list row">
           {
               state.offline.map((value,i) => <CourseItem
+              key={value.slug}
+              {...value}
+              />
+              )}
+         
+          </div>
+          <div className="textbox">
+            <h3 className="sub-title">KHÓA HỌC</h3>
+            <h2 className="main-title">ONLINE</h2>
+          </div>
+          <div className="list row">
+          {
+              state.online.map((value,i) => <CourseItem
               key={value.slug}
               {...value}
               />

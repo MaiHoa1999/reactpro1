@@ -7,13 +7,13 @@ import Register from "./page/register";
 import TeamList from "./page/team";
 import Error from "./page/error";
 import Courses from "./page/courses";
-import CourseDatail from "./page/course_detail";
+import CourseDetail from "./page/course_detail";
 import Fap from "./page/fap";
 import Hoptac from "./page/hoptac";
 import "./asset/style/custom.scss";
 import Profile from "./page/profile";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ListCourse from "./page/course_detail/component/ListCouse";
+
 import Auth from "./service/auth";
 import store from './redux'
 
@@ -82,7 +82,7 @@ function App() {
           <Route path="/profile" >
             <Profile />
           </Route>
-          <Route path="/course/:slug" component={CourseDatail}></Route>
+          <Route path="/course/:slug" component={CourseDetail}></Route>
           <Route path="/team" component={TeamList}></Route>
           <Route path="/register" component={Register}></Route>
 

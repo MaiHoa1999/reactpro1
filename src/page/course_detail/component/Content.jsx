@@ -1,75 +1,38 @@
-export default function Content(){
+import InfoContent from "./InfoContent"
+
+export default function Content({long_description,schedule,teacher,content}){
+  console.log(`content`, content)
     return(
         <section className="section-2">
         <div className="container">
-          <p className="des">Many Laravel apps don’t warrant the complexity of a full front-end framework like Vue or
-            React. In this series, we’ll walk through a handful of simple ways to add dynamic functionality to
-            your apps.</p>
+          <p className="des">{long_description}</p>
           <h2 className="title">giới thiệu về khóa học</h2>
           <div className="cover">
             <img src="img/course-detail-img.png" alt="" />
           </div>
           <h3 className="title">nội dung khóa học</h3>
-          <div className="accordion">
+
+
+            {
+              content?.map((e, i)=><InfoContent
+                
+                  key={i} index={i} {...e}
+                
+              />
+              )
+              }
+         
+          {/* <div className="accordion">
             <div className="accordion__title">
-              <div className="date">Ngày 1</div>
+              <div className="date">{content?.title}</div>
               <h3>Giới thiệu HTML, SEO, BEM.</h3>
             </div>
             <div className="content">
               I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
               some tangible benefits over alternatives like VueJS for simple page interactions.
             </div>
-          </div>
-          <div className="accordion">
-            <div className="accordion__title">
-              <div className="date">Ngày 2</div>
-              <h3>CSS, CSS3, Flexbox, Grid</h3>
-            </div>
-            <div className="content">
-              I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-              some tangible benefits over alternatives like VueJS for simple page interactions.
-            </div>
-          </div>
-          <div className="accordion">
-            <div className="accordion__title">
-              <div className="date">Ngày 3</div>
-              <h3>Media Queries</h3>
-            </div>
-            <div className="content">
-              I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-              some tangible benefits over alternatives like VueJS for simple page interactions.
-            </div>
-          </div>
-          <div className="accordion">
-            <div className="accordion__title">
-              <div className="date">Ngày 4</div>
-              <h3>Boostrap 4</h3>
-            </div>
-            <div className="content">
-              I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-              some tangible benefits over alternatives like VueJS for simple page interactions.
-            </div>
-          </div>
-          <div className="accordion">
-            <div className="accordion__title">
-              <div className="date">Ngày 5</div>
-              <h3>Thực hành dự án website Landing Page</h3>
-            </div>
-            <div className="content">
-              I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-              some tangible benefits over alternatives like VueJS for simple page interactions.
-            </div>
-          </div>
-          <div className="accordion">
-            <div className="accordion__title">
-              <div className="date">Ngày 6</div>
-              <h3>Cài đặt Grunt và cấu trúc thư mục dự án</h3>
-            </div>
-            <div className="content">
-              I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-              some tangible benefits over alternatives like VueJS for simple page interactions.
-            </div>
-          </div>
+          </div> */}
+          
           <h3 className="title">yêu cầu cần có</h3>
           <div className="row row-check">
             <div className="col-md-6">Đã từng học qua HTML, CSS</div>
@@ -91,28 +54,21 @@ export default function Content(){
           </h3>
           <p>
             <strong>Ngày bắt đầu: </strong> 09/09/2020 <br />
-            <strong>Thời gian học: </strong> Thứ 3 từ 18h45-21h45, Thứ 7 từ 12h-15h, Chủ nhật từ 15h-18h
+            <strong>Thời gian học: </strong> {schedule}
           </p>
           <h3 className="title">Người dạy</h3>
           <div className="teaches">
             <div className="teacher">
               <div className="avatar">
-                <img src="img/avatar-lg.png" alt="" />
+                <img src={teacher?.avatar.link} alt="" />
               </div>
               <div className="info">
-                <div className="name">TRẦN NGHĨA</div>
+                <div className="name">{teacher?.title}</div>
                 <div className="title">Founder CFD &amp; Creative Front-End Developer</div>
                 <p className="intro">
-                  My education, career, and even personal life have been molded by one simple principle;
-                  well
-                  designed information resonates with people and can change lives.I have a passion for
-                  making
-                  information resonate. It all starts with how people think. With how humans work. As
-                  humans
-                  we have learned how to read and write and while that is incredible, we are also already
-                  hard-wired to do some things a bit more "automatically"
+                {teacher?.description}
                 </p>
-                <p><strong>Website:</strong> <a href="#">http://nghiatran.info</a></p>
+                <p><strong>Website:</strong> <a href="#">{teacher?.website}</a></p>
               </div>
             </div>
           </div>
