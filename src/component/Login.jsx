@@ -6,6 +6,7 @@ import React, {useContext, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {Context} from '../App.js'
 import Auth from '../service/auth';
+import { loginAction } from '../redux/action/authAction';
 // import useDeLayLink from '../hook/useDelayLink'
 export function Login(){
   let{loginError, setLoginError} = useState(null)
@@ -44,11 +45,13 @@ async function onSubmit(){
     if(Object.keys(errorObj).length === 0){
       let res = await Auth.login(form)
       if(res.data){
-        dispatch({
-          type: 'LOGIN',
-          payload: res.data
+        // dispatch({
+        //   type: 'LOGIN',
+        //   payload: res.data
           
-        })
+        // })
+        dispatch(loginAction(res.data))
+        
       }else if( res.error){
         setLoginError( res.error)
       }

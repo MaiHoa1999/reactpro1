@@ -51,47 +51,11 @@ function App() {
             error:res.error
           }
         }
-        // setState({
-        //   ...state,
-        //   loginError: res.error
-        // })
+      
    }catch(err){
 
    }
    
-  
-  // .then((res)=>{
-  //   return res.json()
-  // })
-  // .then((res)=>{
-  //   if(res.data){
-  //     setState({
-  //       ...state,
-  //       login:res.data
-  //     })
-  //   }else if(res.error)
-  //   setState({
-  //     ...state,
-  //     loginError: res.error
-  //   })
-  // })
-  //   .catch((err) =>{
-  //     console.log(err)    })
-  
-    // if(email === 'admin@gmail.com' && pass === '123456'){
-    //   setState({
-    //     ...state,
-    //     login:{
-    //       name: 'mai hoa',
-    //       avt: '/img/avt/png'
-    //     }
-    //   })
-  
-    // }
-    // else{
-    //   return 'sai thong tin';
-    // }
-
 
   }
   function handleLogout(){
@@ -113,7 +77,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route path="/project" component={Project}></Route>
-          <Route path="/course" component={Courses}></Route>
+          <Route exact path="/course" component={Courses}></Route>
           <Route path="/hoptac" component={Hoptac}></Route>
           <Route path="/profile" >
             <Profile />
@@ -125,16 +89,7 @@ function App() {
           <Route path="/fap" component={Fap}></Route>
           <Route component={Error}></Route>
         </Switch>
-        {/* <Home/> */}
-        {/* <Courses/> */}
-        {/* <CourseDatail/> */}
-        {/* <Error/> */}
-        {/* <TeamList/> */}
-        {/* <Project/> */}
-        {/* <Register/> */}
-        {/* <Hoptac/> */}
-        {/* <Profile/> */}
-        {/* <Fap/> */}
+       
         <Footer />
       </div>
     </Router>

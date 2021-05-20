@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link, useRouteMatch } from "react-router-dom"
 
-export function CourseItem({title, short_description, thumbnail,teacher, course_status}){
+export function CourseItem({title, short_description, thumbnail,teacher, course_status, slug}){
+
     // name, desc, image,teacher_avt, teacher_name, status
     return(
         <div className="col-md-4 course">
         <div className="wrap">
         
-          <Link className="cover" to={`/course`}>
+          <Link className="cover" to={`/course/${slug}`}>
             <img src={thumbnail?.link} alt="" />
 
             {/* status */}
@@ -35,9 +36,9 @@ export function CourseItem({title, short_description, thumbnail,teacher, course_
             </div>
           </Link>
           <div className="info">
-            <a className="name" href="#">
+            <Link className="name" to={`/course/${slug}`}>
               {title}
-            </a>
+            </Link>
             <p className="des">
               {short_description}
             </p>

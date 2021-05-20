@@ -1,6 +1,23 @@
 import { CourseItem } from "../../component";
+import {useState,useEffect} from 'react'
+import CourseApi from '../../service/course'
 
 export default function Courses(){
+  let [state, setState] =useState({
+    offline:[],
+    online:[]
+  })
+
+  useEffect(async() => {
+    let res = await CourseApi.home();
+    // console.log(`res`, res)
+    setState({
+      online: res.online,
+      offline:res.offline
+    })
+    console.log(`res`, res)
+    
+}, [])
     return(
         
       <main className="homepage" id="main">
@@ -17,12 +34,12 @@ export default function Courses(){
             <h2 className="main-title">ONLINE</h2>
           </div>
           <div className="list row">
-          {/* {
-              offline.map((value,i) => <CourseItem 
+          {
+              state.offline.map((value,i) => <CourseItem
               key={value.slug}
               {...value}
               />
-              )} */}
+              )}
          
           </div>
         </div>

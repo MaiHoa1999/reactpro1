@@ -4,6 +4,7 @@ import $ from "jquery";
 import { useContext } from "react";
 import { Context } from "../App.js";
 import { useSelector, useDispatch } from "react-redux";
+import { logoutAction } from "../redux/action/authAction";
 export function Header() {
   let { data, handleLogout } = useContext(Context);
 
@@ -22,10 +23,11 @@ export function Header() {
   }
   const dispatch = useDispatch();
   function Logout() {
-    dispatch({
-      type: "LOGOUT",
+    // dispatch({
+    //   type: "LOGOUT",
 
-    });
+    // });
+    dispatch(logoutAction())
   }
 
   return (
