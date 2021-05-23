@@ -21,13 +21,11 @@ export default function Tab1() {
           required: true,
         },
         phone: {
-          required: true,
+          // required: true,
           pattern: "phone",
         },
       },
       message: {
-      
-
         phone: {
           pattern: " phone không đúng định dạng",
         },
@@ -38,9 +36,7 @@ export default function Tab1() {
 
   async function updateForm() {
     let errorObj = check();
-    // console.log(`error`, error)
     if (Object.keys(errorObj).length === 0) {
-      // console.log(`form`, form)
       let res = await Auth.update(form);
       if (res.data) {
         dispatch(updateAction(res.data));
@@ -70,8 +66,7 @@ export default function Tab1() {
         <p>
           Số điện thoại<span>*</span>
         </p>
-        <input value={form.phone} name="phone" onChange={inputChange} ></input>
-        
+        <input value={form.phone} name="phone" onChange={inputChange}></input>
       </label>
       {error.phone && <p className="text-error">{error.phone}</p>}
       <label>
@@ -83,7 +78,6 @@ export default function Tab1() {
           value={login.email}
           name="email"
           onChange={inputChange}
-         
           type="text"
         />
       </label>

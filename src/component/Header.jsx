@@ -6,8 +6,6 @@ import { Context } from "../App.js";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutAction } from "../redux/action/authAction";
 export function Header() {
-  let { data, handleLogout } = useContext(Context);
-
   const { login } = useSelector((state) => state.auth);
 
   function menuToggle() {
@@ -27,7 +25,7 @@ export function Header() {
     //   type: "LOGOUT",
 
     // });
-    dispatch(logoutAction())
+    dispatch(logoutAction());
   }
 
   return (
