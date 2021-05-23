@@ -2,6 +2,7 @@ import { useState } from "react";
 let patternEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
   //   patternName = /(84|0[3|5|7|8|9])+([0-9]{8})\b/ ,
   patternPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/,
+
   patternUrl =
     /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 
@@ -33,6 +34,7 @@ export default function useFormValidate(initiaForm, validate) {
       if (r.pattern && form[i]) {
         let { pattern } = r;
         if (pattern === "phone") pattern = patternPhone;
+       
         if (pattern === "email") pattern = patternEmail;
         if (pattern === "url") pattern = patternUrl;
         if (!pattern.test(form[i])) {

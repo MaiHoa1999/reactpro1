@@ -1,6 +1,9 @@
 
-import{ LOGIN, LOGOUT} from './../type'
+import{ LOGIN, LOGOUT,ERROR,UPDATE} from './../type'
+
 let initState = {
+    loginError:"",
+    updateForm:'',
     login: JSON.parse(localStorage.getItem('login'))
 }
 export default function authReducer(state = initState, action){
@@ -17,6 +20,22 @@ export default function authReducer(state = initState, action){
         return {
             ...state,
             login: false
+           
+        }
+    }
+    if(action.type === ERROR){
+        
+        return {
+            ...state,
+            loginError: action.payload
+           
+        }
+    }
+    if(action.type === UPDATE){
+        localStorage.setItem('login', JSON.stringify(action.payload))
+        return {
+            ...state,
+            updateForm: action.payload
            
         }
     }

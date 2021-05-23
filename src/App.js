@@ -12,8 +12,9 @@ import Fap from "./page/fap";
 import Hoptac from "./page/hoptac";
 import "./asset/style/custom.scss";
 import Profile from "./page/profile";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {PrivateRoute} from './component/PrivateRoute'
 
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "./service/auth";
 import store from './redux'
 
@@ -68,7 +69,7 @@ function App() {
   
   return (
     <Provider store ={store}>
-    <Context.Provider value={{...state,handlelogin, handleLogout}}>
+
     <Router>
       <div className="App">
         <Header />
@@ -79,9 +80,7 @@ function App() {
           <Route path="/project" component={Project}></Route>
           <Route exact path="/course" component={Courses}></Route>
           <Route path="/hoptac" component={Hoptac}></Route>
-          <Route path="/profile" >
-            <Profile />
-          </Route>
+          <PrivateRoute path="/profile" component={Profile} />
           <Route path="/course/:slug" component={CourseDetail}></Route>
           <Route path="/team" component={TeamList}></Route>
           <Route path="/register" component={Register}></Route>
@@ -93,7 +92,7 @@ function App() {
         <Footer />
       </div>
     </Router>
-    </Context.Provider>
+  
     </Provider>
   );
 }
